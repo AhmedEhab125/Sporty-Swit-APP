@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SportTypeCollectionViewCell" customModule="Sporty" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="201"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="327" height="201"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="football1" translatesAutoresizingMaskIntoConstraints="NO" id="pkn-kA-Oa5">
+                        <rect key="frame" x="0.0" y="0.0" width="327" height="151"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7y-hx-3ID">
+                        <rect key="frame" x="0.0" y="151" width="327" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="zz6-mN-LCE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="W7y-hx-3ID" firstAttribute="top" secondItem="pkn-kA-Oa5" secondAttribute="bottom" id="0cf-wA-6bc"/>
+                <constraint firstAttribute="trailing" secondItem="pkn-kA-Oa5" secondAttribute="trailing" id="3gv-Gn-icU"/>
+                <constraint firstItem="pkn-kA-Oa5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="6iM-HU-CaR"/>
+                <constraint firstAttribute="trailing" secondItem="W7y-hx-3ID" secondAttribute="trailing" id="8ho-Xp-Fo4"/>
+                <constraint firstItem="W7y-hx-3ID" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Beo-8M-z1V"/>
+                <constraint firstItem="pkn-kA-Oa5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="T3F-2V-g7Z"/>
+                <constraint firstAttribute="bottom" secondItem="W7y-hx-3ID" secondAttribute="bottom" id="gXo-mL-MON"/>
+            </constraints>
+            <size key="customSize" width="327" height="201"/>
+            <connections>
+                <outlet property="sportImg" destination="pkn-kA-Oa5" id="TMf-4G-wAq"/>
+                <outlet property="sportTitle" destination="W7y-hx-3ID" id="CYh-Gz-l9R"/>
+            </connections>
+            <point key="canvasLocation" x="341.2213740458015" y="41.901408450704224"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="football1" width="700" height="1252"/>
+    </resources>
+</document>

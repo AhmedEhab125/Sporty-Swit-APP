@@ -14,6 +14,14 @@
 		E2A6C02B2A1945810021F962 /* Sporty.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2A6C0292A1945810021F962 /* Sporty.xcdatamodeld */; };
 		E2A6C02D2A1945830021F962 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2A6C02C2A1945830021F962 /* Assets.xcassets */; };
 		E2A6C0302A1945830021F962 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A6C02E2A1945830021F962 /* LaunchScreen.storyboard */; };
+		E2A6C0392A1950E00021F962 /* SportTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A6C0372A1950E00021F962 /* SportTypeCollectionViewCell.swift */; };
+		E2A6C03A2A1950E00021F962 /* SportTypeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2A6C0382A1950E00021F962 /* SportTypeCollectionViewCell.xib */; };
+		E2A6C03C2A1952980021F962 /* football.png in Resources */ = {isa = PBXBuildFile; fileRef = E2A6C03B2A1952980021F962 /* football.png */; };
+		E2A6C03E2A1953910021F962 /* SportTypeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A6C03D2A1953910021F962 /* SportTypeCollectionViewController.swift */; };
+		E2A6C0402A1960B50021F962 /* SportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A6C03F2A1960B50021F962 /* SportData.swift */; };
+		E2A6C0422A1964A00021F962 /* LagueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A6C0412A1964A00021F962 /* LagueTableViewController.swift */; };
+		E2A6C0452A1965660021F962 /* LagueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A6C0432A1965660021F962 /* LagueTableViewCell.swift */; };
+		E2A6C0462A1965660021F962 /* LagueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2A6C0442A1965660021F962 /* LagueTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,14 @@
 		E2A6C02C2A1945830021F962 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2A6C02F2A1945830021F962 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2A6C0312A1945830021F962 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2A6C0372A1950E00021F962 /* SportTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2A6C0382A1950E00021F962 /* SportTypeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportTypeCollectionViewCell.xib; sourceTree = "<group>"; };
+		E2A6C03B2A1952980021F962 /* football.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = football.png; path = ../../football.png; sourceTree = "<group>"; };
+		E2A6C03D2A1953910021F962 /* SportTypeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTypeCollectionViewController.swift; sourceTree = "<group>"; };
+		E2A6C03F2A1960B50021F962 /* SportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportData.swift; sourceTree = "<group>"; };
+		E2A6C0412A1964A00021F962 /* LagueTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LagueTableViewController.swift; sourceTree = "<group>"; };
+		E2A6C0432A1965660021F962 /* LagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LagueTableViewCell.swift; sourceTree = "<group>"; };
+		E2A6C0442A1965660021F962 /* LagueTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LagueTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +74,22 @@
 		E2A6C01F2A1945810021F962 /* Sporty */ = {
 			isa = PBXGroup;
 			children = (
+				E2A6C0412A1964A00021F962 /* LagueTableViewController.swift */,
 				E2A6C0202A1945810021F962 /* AppDelegate.swift */,
 				E2A6C0222A1945810021F962 /* SceneDelegate.swift */,
 				E2A6C0242A1945810021F962 /* ViewController.swift */,
 				E2A6C0262A1945810021F962 /* Main.storyboard */,
+				E2A6C0432A1965660021F962 /* LagueTableViewCell.swift */,
+				E2A6C0442A1965660021F962 /* LagueTableViewCell.xib */,
+				E2A6C0372A1950E00021F962 /* SportTypeCollectionViewCell.swift */,
+				E2A6C0382A1950E00021F962 /* SportTypeCollectionViewCell.xib */,
 				E2A6C02C2A1945830021F962 /* Assets.xcassets */,
+				E2A6C03B2A1952980021F962 /* football.png */,
 				E2A6C02E2A1945830021F962 /* LaunchScreen.storyboard */,
 				E2A6C0312A1945830021F962 /* Info.plist */,
 				E2A6C0292A1945810021F962 /* Sporty.xcdatamodeld */,
+				E2A6C03D2A1953910021F962 /* SportTypeCollectionViewController.swift */,
+				E2A6C03F2A1960B50021F962 /* SportData.swift */,
 			);
 			path = Sporty;
 			sourceTree = "<group>";
@@ -128,7 +152,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2A6C03C2A1952980021F962 /* football.png in Resources */,
 				E2A6C0302A1945830021F962 /* LaunchScreen.storyboard in Resources */,
+				E2A6C0462A1965660021F962 /* LagueTableViewCell.xib in Resources */,
+				E2A6C03A2A1950E00021F962 /* SportTypeCollectionViewCell.xib in Resources */,
 				E2A6C02D2A1945830021F962 /* Assets.xcassets in Resources */,
 				E2A6C0282A1945810021F962 /* Main.storyboard in Resources */,
 			);
@@ -141,9 +168,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2A6C0392A1950E00021F962 /* SportTypeCollectionViewCell.swift in Sources */,
+				E2A6C0452A1965660021F962 /* LagueTableViewCell.swift in Sources */,
 				E2A6C02B2A1945810021F962 /* Sporty.xcdatamodeld in Sources */,
 				E2A6C0252A1945810021F962 /* ViewController.swift in Sources */,
+				E2A6C0402A1960B50021F962 /* SportData.swift in Sources */,
+				E2A6C03E2A1953910021F962 /* SportTypeCollectionViewController.swift in Sources */,
 				E2A6C0212A1945810021F962 /* AppDelegate.swift in Sources */,
+				E2A6C0422A1964A00021F962 /* LagueTableViewController.swift in Sources */,
 				E2A6C0232A1945810021F962 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
