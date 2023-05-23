@@ -13,6 +13,7 @@ class LeaguesPresenter{
     }
     func showLeagues(){
         NetworkServise.getCountryData {[weak self] allLeagues in
+            print("presenter")
             self?.leagueProtocol.setLeagues(list: allLeagues)
         }
     }
