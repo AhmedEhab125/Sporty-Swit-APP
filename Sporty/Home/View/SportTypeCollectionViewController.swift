@@ -14,10 +14,11 @@ class SportTypeCollectionViewController: UICollectionViewController,UICollection
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         sportlist = [
             SportData(sportImg: UIImage(named: "football1")!, sportName: "Football")
-                     ,SportData(sportImg: UIImage(named: "basketball")!, sportName: "Basketball")
-                     ,SportData(sportImg: UIImage(named: "tennis")!, sportName: "Tennis")
+                     ,SportData(sportImg: UIImage(named: "basketball1")!, sportName: "Basketball")
+                     ,SportData(sportImg: UIImage(named: "tennis1")!, sportName: "Tennis")
             ,SportData(sportImg: UIImage(named: "cricket")!, sportName: "Cricket")
         ]
         // Uncomment the following line to preserve selection between presentations

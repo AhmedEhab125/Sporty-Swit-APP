@@ -6,14 +6,40 @@
 //
 
 import UIKit
+import Kingfisher
+protocol leaguesProtocol {
+    func setLeagues(list : [CountryData])
+    
+}
+class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBarDelegate {
+    @IBOutlet weak var searchBar: UISearchBar!
+    func setLeagues(list: [CountryData]) {
+        leagueslist = list
+        filterList = list
+        self.tableView.reloadData()
+    }
+    var leaguesPresenter : LeaguesPresenter!
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterList = leagueslist
+        if !searchText.isEmpty{
+            filterList = filterList.filter { filteration in
+                filteration.countryName.contains(searchText)
+                
+            }
+        }
+        tableView.reloadData()
 
-class LagueTableViewController: UITableViewController {
+    }
+
+    var leagueslist,filterList : [CountryData]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        leagueslist = []
+        filterList = leagueslist
+        leaguesPresenter = LeaguesPresenter(leagueProtocol: self)
+        leaguesPresenter.showLeagues()
+        
         self.tableView.register(UINib(nibName: "LagueTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -28,14 +54,32 @@ class LagueTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return filterList.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! LagueTableViewCell
         
-        cell.lagueName.text = "league \(indexPath.row)"
+        cell.lagueName.text = filterList[indexPath.row].countryName
+        
+        let url = URL(string: filterList[indexPath.row].countryLogo ?? "" )
+        let processor = DownsamplingImageProcessor(size: cell.lagueImg.bounds.size)
+                     |> RoundCornerImageProcessor(cornerRadius: 20)
+        cell.lagueImg.kf.indicatorType = .activity
+        cell.lagueImg.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "placeholderImage"),
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+        
+        
+        
+        
         // Configure the cell...
         cell.lagueImg.layer.cornerRadius = cell.lagueImg.frame.size.width / 2
         cell.lagueImg.clipsToBounds = true
