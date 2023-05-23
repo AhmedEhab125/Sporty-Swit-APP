@@ -8,22 +8,25 @@
 import UIKit
 import Kingfisher
 protocol leaguesProtocol {
-    func setLeagues(list : [CountryData])
+    func setLeagues(list : [LeaguesData])
     
 }
 class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
-    func setLeagues(list: [CountryData]) {
+    let networkIndicator=UIActivityIndicatorView(style: .large)
+    func setLeagues(list: [LeaguesData]) {
+        print(list)
         leagueslist = list
         filterList = list
         self.tableView.reloadData()
+        self.networkIndicator.stopAnimating()
     }
     var leaguesPresenter : LeaguesPresenter!
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterList = leagueslist
         if !searchText.isEmpty{
             filterList = filterList.filter { filteration in
-                filteration.countryName.contains(searchText)
+                filteration.leagueName.contains(searchText)
                 
             }
         }
@@ -31,14 +34,19 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
 
     }
 
-    var leagueslist,filterList : [CountryData]!
+    var leagueslist,filterList : [LeaguesData]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        networkIndicator.center = view.center
+        networkIndicator.color = UIColor.blue
+        networkIndicator.startAnimating()
+        view.addSubview(networkIndicator)
         leagueslist = []
         filterList = leagueslist
         leaguesPresenter = LeaguesPresenter(leagueProtocol: self)
         leaguesPresenter.showLeagues()
+        
         
         self.tableView.register(UINib(nibName: "LagueTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -61,9 +69,9 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! LagueTableViewCell
         
-        cell.lagueName.text = filterList[indexPath.row].countryName
+        cell.lagueName.text = filterList[indexPath.row].leagueName
         
-        let url = URL(string: filterList[indexPath.row].countryLogo ?? "" )
+        let url = URL(string: filterList[indexPath.row].leagueLogo ?? "" )
         let processor = DownsamplingImageProcessor(size: cell.lagueImg.bounds.size)
                      |> RoundCornerImageProcessor(cornerRadius: 20)
         cell.lagueImg.kf.indicatorType = .activity
@@ -86,7 +94,12 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
 
         return cell
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var nav : LeagueDeatilsViewController = self.storyboard?.instantiateViewController(withIdentifier: "LeagueDeatilsViewController") as! LeagueDeatilsViewController
+        
+        self.navigationController?.pushViewController(nav, animated: true)
     
+    }
 
     /*
     // Override to support conditional editing of the table view.
