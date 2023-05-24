@@ -6,8 +6,17 @@
 //
 
 import UIKit
+import Kingfisher
 
-class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate, UITableViewDataSource {
+class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate, UITableViewDataSource ,ShowComingEventProtocol {
+    var eventList :[ComeEventData]!
+    var leagueId,sport :String!
+    var presenter : LeagueDetailsPresenter!
+    func showEvents(eventList: [ComeEventData]) {
+        self.eventList=eventList
+        self.collectionView.reloadData()
+    }
+    
     @IBOutlet weak var teamsCollectionView: UICollectionView!
     @IBOutlet weak var mstchresultTable: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -15,8 +24,9 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-       
+       eventList = []
+        presenter = LeagueDetailsPresenter(comingEvent: self)
+        presenter.getEvents(sport: sport,leagueId: leagueId)
         let layout = UICollectionViewCompositionalLayout{
             index, environment in
             return self.drawComingEventSecotion()
@@ -45,13 +55,24 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        if collectionView == self.collectionView{
+            return eventList.count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comeingEventCell", for: indexPath) as! ComingEvenCollectionViewCell
-        
+            cell.awayTeamName.text = eventList[indexPath.row].eventAwayTeam
+            cell.homeTeamName.text = eventList[indexPath.row].eventHomeTeam
+            cell.eventDate.text =  eventList[indexPath.row].eventDate
+            cell.eventTime.text = eventList[indexPath.row].eventTime
+            
+            setImg(img: cell.AwayTeamImg, url: eventList[indexPath.row].awayTeamLogo ?? "")
+            
+            setImg(img: cell.homeTeamImg, url: eventList[indexPath.row].homeTeamLogo ?? "")
+
             return cell
             
         }
@@ -118,6 +139,20 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         section.boundarySupplementaryItems = [header]
                 
         return section
+    }
+    func setImg(img :UIImageView , url :String){
+        let processor = DownsamplingImageProcessor(size: img.bounds.size)
+                     |> RoundCornerImageProcessor(cornerRadius: 20)
+        img.kf.indicatorType = .activity
+        
+        img.kf.setImage(with: URL(string: url),
+            placeholder: UIImage(named: "ball"),
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
     }
     
     
