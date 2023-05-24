@@ -11,15 +11,16 @@ import Foundation
 class LeaguesModel : Codable {
     var success: Int
     var result: [LeaguesData]
+    
 }
 
 // MARK: - Result
 class LeaguesData: Codable {
     let leagueKey: Int
         let leagueName: String
-        let countryKey: Int
-        let countryName: String
-        let leagueLogo, countryLogo: String?
+        let countryKey: Int?
+        let countryName: String?
+        let leagueLogo, countryLogo, leagueYear: String?
 
         enum CodingKeys: String, CodingKey {
             case leagueKey = "league_key"
@@ -28,5 +29,6 @@ class LeaguesData: Codable {
             case countryName = "country_name"
             case leagueLogo = "league_logo"
             case countryLogo = "country_logo"
+            case leagueYear = "league_year"
         }
 }

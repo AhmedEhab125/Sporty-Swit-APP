@@ -12,10 +12,10 @@ protocol leaguesProtocol {
     
 }
 class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBarDelegate {
+    var sport : String!
     @IBOutlet weak var searchBar: UISearchBar!
     let networkIndicator=UIActivityIndicatorView(style: .large)
     func setLeagues(list: [LeaguesData]) {
-        print(list)
         leagueslist = list
         filterList = list
         self.tableView.reloadData()
@@ -37,6 +37,7 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
     var leagueslist,filterList : [LeaguesData]!
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         networkIndicator.center = view.center
         networkIndicator.color = UIColor.blue
@@ -45,7 +46,7 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
         leagueslist = []
         filterList = leagueslist
         leaguesPresenter = LeaguesPresenter(leagueProtocol: self)
-        leaguesPresenter.showLeagues()
+        leaguesPresenter.showLeagues(sport: sport)
         
         
         self.tableView.register(UINib(nibName: "LagueTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
@@ -77,7 +78,7 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
         cell.lagueImg.kf.indicatorType = .activity
         cell.lagueImg.kf.setImage(
             with: url,
-            placeholder: UIImage(named: "placeholderImage"),
+            placeholder: UIImage(named: "ball"),
             options: [
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
@@ -96,7 +97,8 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var nav : LeagueDeatilsViewController = self.storyboard?.instantiateViewController(withIdentifier: "LeagueDeatilsViewController") as! LeagueDeatilsViewController
-        
+        nav.leagueId = String(leagueslist[indexPath.row].leagueKey)
+        nav.sport = self.sport
         self.navigationController?.pushViewController(nav, animated: true)
     
     }

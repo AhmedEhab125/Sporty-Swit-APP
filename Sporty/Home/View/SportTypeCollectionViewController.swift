@@ -8,7 +8,7 @@
 import UIKit
 
 private let reuseIdentifier = "Cell"
-var sportlist : [SportData]?
+var sportlist : [SportData]!
 
 class SportTypeCollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
 
@@ -68,7 +68,7 @@ class SportTypeCollectionViewController: UICollectionViewController,UICollection
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var nav : LagueTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "LagueTableViewController") as! LagueTableViewController
-        
+        nav.sport = sportlist[indexPath.row].sportName.lowercased()
         self.navigationController?.pushViewController(nav, animated: true)
     }
 
