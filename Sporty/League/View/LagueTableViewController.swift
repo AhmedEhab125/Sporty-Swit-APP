@@ -78,7 +78,7 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
         cell.lagueImg.kf.indicatorType = .activity
         cell.lagueImg.kf.setImage(
             with: url,
-            placeholder: UIImage(named: "ball"),
+            placeholder: UIImage(named: "noimg1"),
             options: [
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),

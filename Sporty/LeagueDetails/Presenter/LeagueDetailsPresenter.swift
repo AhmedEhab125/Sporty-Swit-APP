@@ -8,8 +8,10 @@
 import Foundation
 class LeagueDetailsPresenter{
     var comingEvent :ShowComingEventProtocol
-    init(comingEvent: ShowComingEventProtocol) {
+    var leagueScore : LeagueScoreProtocol
+    init(comingEvent: ShowComingEventProtocol,leagueScore : LeagueScoreProtocol) {
         self.comingEvent = comingEvent
+        self.leagueScore = leagueScore
     }
     func getEvents(sport :String,leagueId :String){
        
@@ -18,6 +20,16 @@ class LeagueDetailsPresenter{
             self?.comingEvent.showEvents(eventList: data)
         }
     }
+    func getScores(sport :String,leagueId :String){
+       
+        NetworkServise.getComingEvent(sport: sport, fromDate: getlast14Days(), toDate:getDayBefore(),leagueid: leagueId ){
+            [weak self]data in
+            self?.leagueScore.getLeagueScores(scorelist: data)
+        }
+    }
+    
+    
+    
     private func getCurrentDate()-> String{
         let date = Date()
         let dateFormater = DateFormatter()
@@ -34,4 +46,24 @@ class LeagueDetailsPresenter{
         
         return formattedDate
     }
+    private func getDayBefore()-> String{
+        let currentDate = Date()
+        let sevenDaysAfter = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let formattedDate = dateFormatter.string(from: sevenDaysAfter)
+        print(formattedDate)
+        return formattedDate
+    }
+    private func getlast14Days()->String{
+        let currentDate = Date()
+        let sevenDaysAfter = Calendar.current.date(byAdding: .day, value: -14, to: currentDate)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let formattedDate = dateFormatter.string(from: sevenDaysAfter)
+        print(formattedDate)
+        return formattedDate
+    }
+    
 }

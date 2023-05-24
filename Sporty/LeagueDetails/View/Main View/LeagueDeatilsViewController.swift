@@ -8,25 +8,36 @@
 import UIKit
 import Kingfisher
 
-class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate, UITableViewDataSource ,ShowComingEventProtocol {
-    var eventList :[ComeEventData]!
+class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource
+                                ,UITableViewDelegate, UITableViewDataSource
+                                ,ShowComingEventProtocol ,LeagueScoreProtocol{
+ 
+    
+    var eventList ,leagueScoreList:[ComeEventData]!
     var leagueId,sport :String!
     var presenter : LeagueDetailsPresenter!
-    func showEvents(eventList: [ComeEventData]) {
-        self.eventList=eventList
-        self.collectionView.reloadData()
-    }
+ 
     
     @IBOutlet weak var teamsCollectionView: UICollectionView!
     @IBOutlet weak var mstchresultTable: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
-
+    
+    func showEvents(eventList: [ComeEventData]) {
+        self.eventList=eventList
+        self.collectionView.reloadData()
+    }
+    func getLeagueScores(scorelist: [ComeEventData]) {
+        leagueScoreList = scorelist
+        self.mstchresultTable.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        leagueScoreList = []
        eventList = []
-        presenter = LeagueDetailsPresenter(comingEvent: self)
+        presenter = LeagueDetailsPresenter(comingEvent: self,leagueScore: self)
         presenter.getEvents(sport: sport,leagueId: leagueId)
+        presenter.getScores(sport: sport, leagueId: leagueId)
         let layout = UICollectionViewCompositionalLayout{
             index, environment in
             return self.drawComingEventSecotion()
@@ -39,15 +50,26 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return 1
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        9
+        return leagueScoreList.count
     }
-    
+    var count = 0
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "matchResulttableCell", for: indexPath) as! GameResultTableViewCell
-        cell.awayTeamName.text = "ahmed"
+        if count < leagueScoreList.count{
+            cell.awayTeamName.text = leagueScoreList[count].eventAwayTeam
+            cell.homeTeamName.text = leagueScoreList[count].eventHomeTeam
+            
+            cell.gameDate.text = leagueScoreList[count].eventDate
+            cell.gameScore.text =  leagueScoreList[count].eventFinalResult
+            
+            self.setImg(img: cell.awayTeamImg, url: leagueScoreList[count].awayTeamLogo ?? "")
+            self.setImg(img: cell.homeTeamImg, url: leagueScoreList[count].homeTeamLogo ?? "")
+            count = count + 1
+        }
         return cell
     }
     
@@ -64,14 +86,14 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comeingEventCell", for: indexPath) as! ComingEvenCollectionViewCell
-            cell.awayTeamName.text = eventList[indexPath.row].eventAwayTeam
-            cell.homeTeamName.text = eventList[indexPath.row].eventHomeTeam
-            cell.eventDate.text =  eventList[indexPath.row].eventDate
-            cell.eventTime.text = eventList[indexPath.row].eventTime
+            cell.awayTeamName.text = eventList[eventList.count-1-indexPath.row].eventAwayTeam
+            cell.homeTeamName.text = eventList[eventList.count-1-indexPath.row].eventHomeTeam
+            cell.eventDate.text =  eventList[eventList.count-1-indexPath.row].eventDate
+            cell.eventTime.text = eventList[eventList.count-1-indexPath.row].eventTime
             
-            setImg(img: cell.AwayTeamImg, url: eventList[indexPath.row].awayTeamLogo ?? "")
+            setImg(img: cell.AwayTeamImg, url: eventList[eventList.count-1-indexPath.row].awayTeamLogo ?? "")
             
-            setImg(img: cell.homeTeamImg, url: eventList[indexPath.row].homeTeamLogo ?? "")
+            setImg(img: cell.homeTeamImg, url: eventList[eventList.count-1-indexPath.row].homeTeamLogo ?? "")
 
             return cell
             
@@ -94,7 +116,7 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
     
     func  drawComingEventSecotion() -> NSCollectionLayoutSection{
         let itemSize = NSCollectionLayoutSize (widthDimension:
-                .fractionalWidth(1), heightDimension: .fractionalHeight (1))
+                .fractionalWidth(1), heightDimension: .estimated(200))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
       let groupSize = NSCollectionLayoutSize (widthDimension:
             .fractionalWidth(1), heightDimension: .fractionalHeight (1))
@@ -146,7 +168,7 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         img.kf.indicatorType = .activity
         
         img.kf.setImage(with: URL(string: url),
-            placeholder: UIImage(named: "ball"),
+            placeholder: UIImage(named: "noimg1"),
             options: [
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
