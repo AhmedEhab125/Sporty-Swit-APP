@@ -11,9 +11,9 @@ class LeaguesPresenter{
     init(leagueProtocol: leaguesProtocol) {
         self.leagueProtocol = leagueProtocol
     }
-    func showLeagues(){
-        NetworkServise.getCountryData {[weak self] allLeagues in
-            print("presenter")
+    func showLeagues(sport : String){
+        NetworkServise.getCountryData(sport: sport ) {[weak self] allLeagues in
+            print("presenter \(allLeagues)")
             self?.leagueProtocol.setLeagues(list: allLeagues)
         }
     }
