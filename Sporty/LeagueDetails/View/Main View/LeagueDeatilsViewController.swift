@@ -10,12 +10,18 @@ import Kingfisher
 
 class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource
                                 ,UITableViewDelegate, UITableViewDataSource
-                                ,ShowComingEventProtocol ,LeagueScoreProtocol{
+,ShowComingEventProtocol ,LeagueScoreProtocol,TeamsProtocol{
+  
+    
  
     
     var eventList ,leagueScoreList:[ComeEventData]!
+    var teamlist : [TeamData]!
     var leagueId,sport :String!
     var presenter : LeagueDetailsPresenter!
+    let teamsNetworkIndicator = UIActivityIndicatorView(style: .large)
+
+
  
     
     @IBOutlet weak var teamsCollectionView: UICollectionView!
@@ -24,20 +30,37 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
     
     func showEvents(eventList: [ComeEventData]) {
         self.eventList=eventList
+        if eventList.isEmpty{
+            self.collectionView.isHidden = true
+        }
         self.collectionView.reloadData()
     }
     func getLeagueScores(scorelist: [ComeEventData]) {
         leagueScoreList = scorelist
+        if leagueScoreList.isEmpty{
+            self.mstchresultTable.isHidden = true
+        }
         self.mstchresultTable.reloadData()
+    }
+    func getTeams(teamList: [TeamData]) {
+        self.teamlist = teamList
+        if teamList.isEmpty{
+            self.teamsCollectionView.isHidden = true
+        }
+        self.teamsCollectionView.reloadData()
+        teamsNetworkIndicator.stopAnimating()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        teamlist = []
         leagueScoreList = []
        eventList = []
-        presenter = LeagueDetailsPresenter(comingEvent: self,leagueScore: self)
+        presenter = LeagueDetailsPresenter(comingEvent: self,leagueScore: self,teams: self)
         presenter.getEvents(sport: sport,leagueId: leagueId)
         presenter.getScores(sport: sport, leagueId: leagueId)
+        presenter.getTeams(sport: sport, leagueId: leagueId)
+        initNetworkIndicator()
         let layout = UICollectionViewCompositionalLayout{
             index, environment in
             return self.drawComingEventSecotion()
@@ -45,6 +68,14 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         self.collectionView.setCollectionViewLayout(layout, animated: true)
         collectionView.register(UINib(nibName: "ComingEvenCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "comeingEventCell")
         // Do any additional setup after loading the view.
+    }
+    func initNetworkIndicator(){
+        teamsNetworkIndicator.center = view.center
+        teamsNetworkIndicator.color = UIColor.blue
+        teamsNetworkIndicator.startAnimating()
+        self.view.addSubview(teamsNetworkIndicator)
+        
+        
     }
   
   
@@ -80,7 +111,7 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         if collectionView == self.collectionView{
             return eventList.count
         }
-        return 0
+        return teamlist.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -99,7 +130,8 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
             
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamsCell", for: indexPath) as! TeamesCollectionViewCell
-    
+        setImg(img: cell.teamImg, url:teamlist[indexPath.row].teamLogo)
+        cell.teamName.text = teamlist[indexPath.row].teamName
         return cell
         
     }
@@ -110,7 +142,13 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         }
         return UICollectionReusableView()
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == teamsCollectionView{
+            var nav : ClubDataViewController = self.storyboard?.instantiateViewController(withIdentifier: "ClubDataViewController") as! ClubDataViewController
+            nav.clubData = teamlist[indexPath.row]
+            self.navigationController?.pushViewController(nav, animated: true)
+        }
+    }
 
    
     
