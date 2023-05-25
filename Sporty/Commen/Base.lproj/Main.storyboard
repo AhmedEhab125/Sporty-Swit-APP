@@ -9,21 +9,34 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="Lu2-Nx-MPT">
+        <!--Favourite Teams Table View Controller-->
+        <scene sceneID="uNE-0j-4AO">
             <objects>
-                <viewController id="6um-DL-Bcw" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hSN-c7-MDu">
+                <tableViewController id="bJt-z7-XVo" customClass="FavouriteTeamsTableViewController" customModule="Sporty" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ls9-hV-hwF">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="lh3-eJ-Jk6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Kua-Vw-D8Y"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="za5-9j-CPm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="gen-Ks-3hn" customClass="LagueTableViewCell" customModule="Sporty" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gen-Ks-3hn" id="gfy-zE-Wjk">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bJt-z7-XVo" id="1Ye-Lz-BdJ"/>
+                            <outlet property="delegate" destination="bJt-z7-XVo" id="PN7-KS-iNo"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="6su-ha-9QR"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aya-UN-RrU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2027" y="338"/>
+            <point key="canvasLocation" x="2066" y="339"/>
         </scene>
         <!--Sport Type Collection View Controller-->
         <scene sceneID="8qO-Ly-WQ7">
@@ -98,7 +111,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0oO-hc-XQz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2869" y="-349"/>
+            <point key="canvasLocation" x="2886" y="-332"/>
         </scene>
         <!--League Deatils View Controller-->
         <scene sceneID="dyu-9s-p9d">
@@ -399,6 +412,15 @@
                                     <constraint firstAttribute="height" constant="200" id="Yyy-a9-N7o"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aez-zI-FoH">
+                                <rect key="frame" x="326.33333333333331" y="59" width="50.666666666666686" height="35"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
+                                <connections>
+                                    <action selector="addtoFavBtn:" destination="0Uo-zF-cei" eventType="touchUpInside" id="Qrh-0i-3jX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1Iu-LU-UA6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -406,6 +428,7 @@
                             <constraint firstItem="CPi-lZ-dQJ" firstAttribute="bottom" secondItem="1Iu-LU-UA6" secondAttribute="bottom" id="5y0-2r-tmF"/>
                             <constraint firstItem="CWl-1y-4OU" firstAttribute="leading" secondItem="1Iu-LU-UA6" secondAttribute="leading" constant="16" id="7Gf-NU-O7l"/>
                             <constraint firstItem="1Iu-LU-UA6" firstAttribute="trailing" secondItem="CWl-1y-4OU" secondAttribute="trailing" constant="16" id="7wD-4r-0cw"/>
+                            <constraint firstItem="1Iu-LU-UA6" firstAttribute="trailing" secondItem="aez-zI-FoH" secondAttribute="trailing" constant="16" id="BQi-UR-zQo"/>
                             <constraint firstItem="1Iu-LU-UA6" firstAttribute="trailing" secondItem="CPi-lZ-dQJ" secondAttribute="trailing" constant="16" id="CfU-0t-5kW"/>
                             <constraint firstItem="CPi-lZ-dQJ" firstAttribute="leading" secondItem="1Iu-LU-UA6" secondAttribute="leading" constant="16" id="IfX-zI-ptE"/>
                             <constraint firstItem="d4b-rU-W7A" firstAttribute="top" secondItem="1Iu-LU-UA6" secondAttribute="top" constant="5" id="KEK-3q-LA1"/>
@@ -413,10 +436,12 @@
                             <constraint firstItem="CWl-1y-4OU" firstAttribute="top" secondItem="d4b-rU-W7A" secondAttribute="bottom" constant="5" id="abY-aq-Kdk"/>
                             <constraint firstItem="d4b-rU-W7A" firstAttribute="leading" secondItem="1Iu-LU-UA6" secondAttribute="leading" constant="16" id="dWb-jo-oqQ"/>
                             <constraint firstItem="CPi-lZ-dQJ" firstAttribute="top" secondItem="CWl-1y-4OU" secondAttribute="bottom" constant="5" id="dtd-ac-gKy"/>
+                            <constraint firstItem="aez-zI-FoH" firstAttribute="top" secondItem="1Iu-LU-UA6" secondAttribute="top" id="f4H-x1-w4u"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="clubImg" destination="CWl-1y-4OU" id="wJp-iB-TRB"/>
+                        <outlet property="facBtnImg" destination="aez-zI-FoH" id="423-lv-qkd"/>
                         <outlet property="teamCollectionview" destination="CPi-lZ-dQJ" id="8zO-XZ-v41"/>
                         <outlet property="teamName" destination="d4b-rU-W7A" id="J0T-dV-pdz"/>
                     </connections>
@@ -474,7 +499,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="6um-DL-Bcw" kind="relationship" relationship="rootViewController" id="OAF-NK-QKr"/>
+                        <segue destination="bJt-z7-XVo" kind="relationship" relationship="rootViewController" id="mb6-nR-gsm"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qi9-TO-XFF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -485,6 +510,7 @@
     <resources>
         <image name="basketball" width="360" height="494"/>
         <image name="cricket" width="1257" height="2608"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="noimg1" width="600" height="600"/>
         <image name="star" catalog="system" width="128" height="116"/>
