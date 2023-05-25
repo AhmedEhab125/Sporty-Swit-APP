@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Alamofire
 protocol leaguesProtocol {
     func setLeagues(list : [LeaguesData])
     
@@ -16,6 +17,7 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
     @IBOutlet weak var searchBar: UISearchBar!
     let networkIndicator=UIActivityIndicatorView(style: .large)
     func setLeagues(list: [LeaguesData]) {
+        setCashData(list: list)
         leagueslist = list
         filterList = list
         self.tableView.reloadData()
@@ -27,7 +29,6 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
         if !searchText.isEmpty{
             filterList = filterList.filter { filteration in
                 filteration.leagueName.contains(searchText)
-                
             }
         }
         tableView.reloadData()
@@ -39,14 +40,20 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        networkIndicator.center = view.center
-        networkIndicator.color = UIColor.blue
-        networkIndicator.startAnimating()
-        view.addSubview(networkIndicator)
-        leagueslist = []
-        filterList = leagueslist
-        leaguesPresenter = LeaguesPresenter(leagueProtocol: self)
-        leaguesPresenter.showLeagues(sport: sport)
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
+        if ((manager!.isReachable)) {
+            initNetworkIndicator()
+            leagueslist = []
+            filterList = leagueslist
+            leaguesPresenter = LeaguesPresenter(leagueProtocol: self)
+            leaguesPresenter.showLeagues(sport: sport)
+        }else{
+            
+            showNoNetworkAlert()
+            getCashedData()
+            
+        }
+        
         
         
         self.tableView.register(UINib(nibName: "LagueTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
@@ -96,11 +103,54 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var nav : LeagueDeatilsViewController = self.storyboard?.instantiateViewController(withIdentifier: "LeagueDeatilsViewController") as! LeagueDeatilsViewController
-        nav.leagueId = String(leagueslist[indexPath.row].leagueKey)
-        nav.sport = self.sport
-        self.navigationController?.pushViewController(nav, animated: true)
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
+        if ((manager!.isReachable)) {
+            var nav : LeagueDeatilsViewController = self.storyboard?.instantiateViewController(withIdentifier: "LeagueDeatilsViewController") as! LeagueDeatilsViewController
+            nav.leagueId = String(filterList[indexPath.row].leagueKey)
+            nav.sport = self.sport
+            self.navigationController?.pushViewController(nav, animated: true)
+        }else{
+            showNoNetworkAlert()
+        }
+    }
+    func showNoNetworkAlert(){
+        let alertController = UIAlertController(title: "No Internet", message: "No Internet Connection", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // Handle OK button tap action
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    func setCashData(list : [LeaguesData]){
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(list) {
+
+            // Save the encoded data object into UserDefaults
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: sport)
+            print("saved")
+        }
+    }
+    func initNetworkIndicator(){
+        networkIndicator.center = view.center
+        networkIndicator.color = UIColor.blue
+        networkIndicator.startAnimating()
+        view.addSubview(networkIndicator)
+    }
     
+    func getCashedData(){
+        let defaults = UserDefaults.standard
+        if let savedData = defaults.object(forKey: sport) as? Data {
+            let decoder = JSONDecoder()
+            
+            // Decode the data object back into a list of objects
+            if let loadedObjects = try? decoder.decode([LeaguesData].self, from: savedData) {
+                leagueslist = loadedObjects
+                filterList = loadedObjects
+                tableView.reloadData()
+            }
+        }
     }
 
     /*
