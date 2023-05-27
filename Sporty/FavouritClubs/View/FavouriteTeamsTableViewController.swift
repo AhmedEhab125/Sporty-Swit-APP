@@ -47,7 +47,7 @@ class FavouriteTeamsTableViewController: UITableViewController
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! LagueTableViewCell
             cell.lagueName.text = teamList[indexPath.row].name
-            cell.lagueImg.image = UIImage(data: teamList[indexPath.row].img)
+            cell.lagueImg.image = UIImage(data: teamList[indexPath.row].img ?? Data())
         // Configure the cell...
 
         return cell
