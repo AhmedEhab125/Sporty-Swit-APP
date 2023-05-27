@@ -45,7 +45,7 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
             initNetworkIndicator()
             leagueslist = []
             filterList = leagueslist
-            leaguesPresenter = LeaguesPresenter(leagueProtocol: self)
+            leaguesPresenter = LeaguesPresenter(leagueProtocol: self,network: NetworkServise())
             leaguesPresenter.showLeagues(sport: sport)
         }else{
             

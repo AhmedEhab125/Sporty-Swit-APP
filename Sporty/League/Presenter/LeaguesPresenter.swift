@@ -8,13 +8,16 @@
 import Foundation
 class LeaguesPresenter{
     var leagueProtocol : leaguesProtocol
-    init(leagueProtocol: leaguesProtocol) {
+    var network :NetworkProtocol
+    init(leagueProtocol: leaguesProtocol, network: NetworkProtocol) {
         self.leagueProtocol = leagueProtocol
+        self.network = network
     }
+    
     func showLeagues(sport : String){
-        NetworkServise.getCountryData(sport: sport ) {[weak self] allLeagues in
+        network.getCountryData(sport: sport ) {[weak self] allLeagues ,error in
             print("presenter \(allLeagues)")
-            self?.leagueProtocol.setLeagues(list: allLeagues)
+            self?.leagueProtocol.setLeagues(list: allLeagues ?? [])
         }
     }
     

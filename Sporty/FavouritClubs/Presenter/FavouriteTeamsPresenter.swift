@@ -17,6 +17,9 @@ class FavouriteTeamsPresenter{
             self?.favTeams.showTeams(list: teamList)
         }
     }
+    func deleteFromFavourite(appDelegat:AppDelegate,team: Int){
+        ClubDataBase.deleteTeam(appDeleate: appDelegat, index: team)
+    }
 }
 
 
