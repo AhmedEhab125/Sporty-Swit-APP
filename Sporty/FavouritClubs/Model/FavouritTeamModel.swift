@@ -7,11 +7,11 @@
 
 import Foundation
 struct FavouritTeamModel{
-    var id : Int
-    var name : String
-    var img : Data
-    var sport :String
-    init(id: Int, name: String, img: Data, sport: String) {
+    var id : Int?
+    var name : String?
+    var img : Data?
+    var sport :String?
+    init(id: Int?, name: String?, img: Data?, sport: String?) {
         self.id = id
         self.name = name
         self.img = img
