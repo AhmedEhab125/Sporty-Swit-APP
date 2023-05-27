@@ -75,7 +75,7 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         teamlist = []
         leagueScoreList = []
        eventList = []
-        presenter = LeagueDetailsPresenter(comingEvent: self,leagueScore: self,teams: self)
+        presenter = LeagueDetailsPresenter(comingEvent: self,leagueScore: self,teams: self,network: NetworkServise())
         presenter.getEvents(sport: sport,leagueId: leagueId)
         presenter.getScores(sport: sport, leagueId: leagueId)
         presenter.getTeams(sport: sport, leagueId: leagueId)
@@ -87,6 +87,10 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         self.collectionView.setCollectionViewLayout(layout, animated: true)
         collectionView.register(UINib(nibName: "ComingEvenCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "comeingEventCell")
         // Do any additional setup after loading the view.
+        if(sport.elementsEqual("tennis")){
+            teamsCollectionView.isHidden = true
+            
+        }
     }
     func initNetworkIndicator(){
         teamsNetworkIndicator.center = view.center

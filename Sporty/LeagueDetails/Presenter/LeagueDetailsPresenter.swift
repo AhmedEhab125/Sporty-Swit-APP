@@ -10,30 +10,32 @@ class LeagueDetailsPresenter{
     var comingEvent :ShowComingEventProtocol
     var leagueScore : LeagueScoreProtocol
     var teams : TeamsProtocol
-    init(comingEvent: ShowComingEventProtocol,leagueScore : LeagueScoreProtocol,teams : TeamsProtocol) {
+    var network :NetworkProtocol
+    init(comingEvent: ShowComingEventProtocol, leagueScore: LeagueScoreProtocol, teams: TeamsProtocol, network: NetworkProtocol) {
         self.comingEvent = comingEvent
         self.leagueScore = leagueScore
-        self.teams=teams
+        self.teams = teams
+        self.network = network
     }
     func getEvents(sport :String,leagueId :String){
        
-        NetworkServise.getComingEvent(sport: sport, fromDate: getCurrentDate(), toDate:getForDate(),leagueid: leagueId ){
-            [weak self]data in
-            self?.comingEvent.showEvents(eventList: data)
+        network.getComingEvent(sport: sport, fromDate: getCurrentDate(), toDate:getForDate(),leagueid: leagueId ){
+            [weak self]data ,error in
+            self?.comingEvent.showEvents(eventList: data ?? [])
         }
     }
     func getScores(sport :String,leagueId :String){
        
-        NetworkServise.getComingEvent(sport: sport, fromDate: getlast14Days(), toDate:getDayBefore(),leagueid: leagueId ){
-            [weak self]data in
-            self?.leagueScore.getLeagueScores(scorelist: data)
+        network.getComingEvent(sport: sport, fromDate: getlast14Days(), toDate:getDayBefore(),leagueid: leagueId ){
+            [weak self]data,error in
+            self?.leagueScore.getLeagueScores(scorelist: data ?? [])
         }
     }
     func getTeams(sport :String,leagueId :String){
        
-        NetworkServise.getTeams(sport: sport,leagueid: leagueId ){
-            [weak self]data in
-            self?.teams.getTeams(teamList: data)
+        network.getTeams(sport: sport,leagueid: leagueId ){
+            [weak self]data,error in
+            self?.teams.getTeams(teamList: data ?? [])
         }
     }
     

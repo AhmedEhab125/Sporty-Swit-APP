@@ -66,17 +66,36 @@ class FavouriteTeamsTableViewController: UITableViewController
     }
     */
 
-    /*
+  
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            showNoNetworkAlert(indexPath: indexPath)
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    func showNoNetworkAlert(indexPath : IndexPath){
+        let alertController = UIAlertController(title: "Delete Confirmation", message: "Are you sure you want to delete ?", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "Delete", style: .default) { (action) in
+            let appDeleate = UIApplication.shared.delegate as! AppDelegate
+
+            // Handle OK button tap action
+            self.presenter.deleteFromFavourite(appDelegat: appDeleate, team: indexPath.row)
+            self.teamList.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        let caneleAction = UIAlertAction(title: "canele", style: .default) { (action) in
+            // Handle OK button tap action
+        }
+        alertController.addAction(caneleAction)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
 
     /*
     // Override to support rearranging the table view.

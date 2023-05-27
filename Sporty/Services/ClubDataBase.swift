@@ -39,4 +39,17 @@ class ClubDataBase{
         })
         compilation(teamList)
     }
+    static func deleteTeam(appDeleate : AppDelegate,index :Int){
+        var context : NSManagedObjectContext = appDeleate.persistentContainer.viewContext
+        let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "ClubData")
+        guard let  data  = try? context.fetch(fetchReq)else{
+            return
+        }
+        context.delete((data[index]))
+       try? context.save()
+            
+        
+            
+      
+    }
 }
