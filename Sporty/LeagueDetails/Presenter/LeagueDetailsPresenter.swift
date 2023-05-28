@@ -71,7 +71,7 @@ class LeagueDetailsPresenter{
     }
     private func getlast14Days()->String{
         let currentDate = Date()
-        let sevenDaysAfter = Calendar.current.date(byAdding: .day, value: -90, to: currentDate)!
+        let sevenDaysAfter = Calendar.current.date(byAdding: .day, value: -280, to: currentDate)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let formattedDate = dateFormatter.string(from: sevenDaysAfter)

@@ -53,6 +53,7 @@
 		E2C6AEF82A1EA62200EF1269 /* ClubDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C6AEF72A1EA62200EF1269 /* ClubDataViewController.swift */; };
 		E2C6AEFB2A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C6AEF92A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.swift */; };
 		E2C6AEFC2A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2C6AEFA2A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.xib */; };
+		E2E285F52A23EE8C00E5BEEA /* TeamDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E285F42A23EE8C00E5BEEA /* TeamDataProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		E2C6AEF72A1EA62200EF1269 /* ClubDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubDataViewController.swift; sourceTree = "<group>"; };
 		E2C6AEF92A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPlayersCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2C6AEFA2A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamPlayersCollectionViewCell.xib; sourceTree = "<group>"; };
+		E2E285F42A23EE8C00E5BEEA /* TeamDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDataProtocol.swift; sourceTree = "<group>"; };
 		F472368A39EFCC1DBABB8CBC /* Pods_Sporty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sporty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -417,6 +419,7 @@
 				E2C6AEF72A1EA62200EF1269 /* ClubDataViewController.swift */,
 				E2C6AEF92A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.swift */,
 				E2C6AEFA2A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.xib */,
+				E2E285F42A23EE8C00E5BEEA /* TeamDataProtocol.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				E2C6AEFB2A1EA96F00EF1269 /* TeamPlayersCollectionViewCell.swift in Sources */,
 				E229441A2A1CC1C3005EBF4B /* LeaguesModel.swift in Sources */,
 				E2A6C0452A1965660021F962 /* LagueTableViewCell.swift in Sources */,
+				E2E285F52A23EE8C00E5BEEA /* TeamDataProtocol.swift in Sources */,
 				E2A783F82A202655006371A4 /* FavouritTeamModel.swift in Sources */,
 				E22944242A1D36B5005EBF4B /* TeamesCollectionViewCell.swift in Sources */,
 				E2A783F52A20186C006371A4 /* FavouriteTeamsProtocol.swift in Sources */,
