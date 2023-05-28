@@ -118,17 +118,40 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
                 if sport.elementsEqual("tennis"){
                     cell.awayTeamName.text = leagueScoreList[count].eventFirstPlayer
                     cell.homeTeamName.text = leagueScoreList[count].eventSecondPlayer
-                }else{
+                    cell.gameDate.text = leagueScoreList[count].eventDate
+                    cell.gameScore.text =  leagueScoreList[count].eventFinalResult
+                    self.setImg(img: cell.awayTeamImg, url: leagueScoreList[count].awayTeamLogo ?? "")
+                    self.setImg(img: cell.homeTeamImg, url: leagueScoreList[count].homeTeamLogo ?? "")
+                }else if(sport.elementsEqual("cricket")){
                     cell.awayTeamName.text = leagueScoreList[count].eventAwayTeam
                     cell.homeTeamName.text = leagueScoreList[count].eventHomeTeam
-                    
+                    cell.gameDate.text = leagueScoreList[count].eventDateStart
+                    cell.gameScore.text =  (leagueScoreList[count].eventHomeFinalResult!  + " - " + leagueScoreList[count].eventAwayFinalResult! )
+                    cell.gameScore.font = UIFont.systemFont(ofSize: 20)
+
+                    self.setImg(img: cell.awayTeamImg, url: leagueScoreList[count].eventAwayTeamLogo ?? "")
+                    self.setImg(img: cell.homeTeamImg, url: leagueScoreList[count].eventHomeTeamLogo ?? "")
+                }
+                else if(sport.elementsEqual("basketball")){
+                    cell.awayTeamName.text = leagueScoreList[count].eventAwayTeam
+                    cell.homeTeamName.text = leagueScoreList[count].eventHomeTeam
+                    cell.gameDate.text = leagueScoreList[count].eventDate
+                    cell.gameScore.text =  leagueScoreList[count].eventFinalResult
+                    self.setImg(img: cell.awayTeamImg, url: leagueScoreList[count].eventAwayTeamLogo ?? "")
+                    self.setImg(img: cell.homeTeamImg, url: leagueScoreList[count].eventHomeTeamLogo ?? "")
+                }
+                else{
+                    cell.awayTeamName.text = leagueScoreList[count].eventAwayTeam
+                    cell.homeTeamName.text = leagueScoreList[count].eventHomeTeam
+                    cell.gameDate.text = leagueScoreList[count].eventDate
+                    cell.gameScore.text =  leagueScoreList[count].eventFinalResult
+                    self.setImg(img: cell.awayTeamImg, url: leagueScoreList[count].awayTeamLogo ?? "")
+                    self.setImg(img: cell.homeTeamImg, url: leagueScoreList[count].homeTeamLogo ?? "")
                 }
                 
-                cell.gameDate.text = leagueScoreList[count].eventDate
-                cell.gameScore.text =  leagueScoreList[count].eventFinalResult
                 
-                self.setImg(img: cell.awayTeamImg, url: leagueScoreList[count].awayTeamLogo ?? "")
-                self.setImg(img: cell.homeTeamImg, url: leagueScoreList[count].homeTeamLogo ?? "")
+                
+                
                 
             }else{
                 cell.gameScore.text = "Not Avilable"

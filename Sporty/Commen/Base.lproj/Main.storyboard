@@ -212,8 +212,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2-1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ih3-51-ZhF">
-                                                    <rect key="frame" x="105" y="53" width="151" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2-1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ih3-51-ZhF">
+                                                    <rect key="frame" x="121" y="46.333333333333343" width="119" height="34.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -245,9 +245,11 @@
                                                 <constraint firstItem="PWK-0r-pV9" firstAttribute="leading" secondItem="nYI-DQ-1IN" secondAttribute="trailing" id="NgA-FH-6KC"/>
                                                 <constraint firstAttribute="bottom" secondItem="1MU-kB-toZ" secondAttribute="bottom" constant="1" id="No5-Xs-8as"/>
                                                 <constraint firstItem="nYI-DQ-1IN" firstAttribute="top" secondItem="S44-qr-NdF" secondAttribute="top" constant="5" id="SHK-tK-R7T"/>
+                                                <constraint firstItem="Ih3-51-ZhF" firstAttribute="leading" secondItem="nYI-DQ-1IN" secondAttribute="trailing" constant="16" id="duJ-6C-ayh"/>
                                                 <constraint firstAttribute="width" secondItem="9pI-hh-Q3b" secondAttribute="width" multiplier="3.61" id="iRr-ZZ-6DY"/>
                                                 <constraint firstAttribute="trailing" secondItem="1MU-kB-toZ" secondAttribute="trailing" constant="5" id="nuQ-3E-wer"/>
                                                 <constraint firstAttribute="bottom" secondItem="JrB-Iy-fOD" secondAttribute="bottom" constant="30" id="oND-IE-5Rv"/>
+                                                <constraint firstItem="JrB-Iy-fOD" firstAttribute="leading" secondItem="Ih3-51-ZhF" secondAttribute="trailing" constant="16" id="pMs-vj-YqJ"/>
                                                 <constraint firstItem="9pI-hh-Q3b" firstAttribute="width" secondItem="nYI-DQ-1IN" secondAttribute="width" id="puj-ma-0pG"/>
                                                 <constraint firstItem="1MU-kB-toZ" firstAttribute="top" secondItem="JrB-Iy-fOD" secondAttribute="bottom" constant="2" id="qrA-DV-hEy"/>
                                                 <constraint firstItem="9pI-hh-Q3b" firstAttribute="leading" secondItem="S44-qr-NdF" secondAttribute="leading" constant="5" id="tXy-dR-qE3"/>
