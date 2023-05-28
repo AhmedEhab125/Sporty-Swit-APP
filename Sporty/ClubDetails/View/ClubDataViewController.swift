@@ -14,6 +14,7 @@ class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollec
     var clubPresenter :ClubDataPresenter!
     var sport :String!
     var teamId : String?
+    var clubState = ""
     let networkIndicator=UIActivityIndicatorView(style: .large)
     
     @IBOutlet weak var facBtnImg: UIButton!
@@ -22,11 +23,11 @@ class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollec
     @IBOutlet weak var teamCollectionview: UICollectionView!
     func getTeamData(teamData: TeamData?) {
         if teamData != nil{
+            clubState = "In Favourite"
             clubData = teamData
             setImg(img: clubImg, url: clubData?.teamLogo ?? "")
             teamName.text = clubData?.teamName
             self.teamCollectionview.reloadData()
-            facBtnImg.isHidden = false
             clubImg.isHidden = false
             
         }
@@ -87,9 +88,14 @@ class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollec
     }
     
     @IBAction func addtoFavBtn(_ sender: UIButton) {
-        self.facBtnImg.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        let appDeleate = UIApplication.shared.delegate as! AppDelegate
-        clubPresenter.addTeamToDB(appDelegate: appDeleate, id: clubData?.teamKey ?? 0, name: clubData?.teamName ?? "", img: (clubImg.image?.jpegData(compressionQuality: 1.0))!, sport: sport)
+        if (clubState.elementsEqual("In Favourite")){
+            
+        }else{
+            self.facBtnImg.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            let appDeleate = UIApplication.shared.delegate as! AppDelegate
+            clubPresenter.addTeamToDB(appDelegate: appDeleate, id: clubData?.teamKey ?? 0, name: clubData?.teamName ?? "", img: (clubImg.image?.jpegData(compressionQuality: 1.0))!, sport: sport)
+            
+        }
     }
     func initNetworkIndicator(){
         networkIndicator.center = view.center

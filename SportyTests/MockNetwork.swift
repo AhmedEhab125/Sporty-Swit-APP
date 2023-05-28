@@ -20,6 +20,10 @@ class MockNetwork{
     
 }
 extension MockNetwork:NetworkProtocol{
+    func getTeamData(sport: String, teamId: String, compilation: @escaping ([Sporty.TeamData]?, Error?) -> Void) {
+        
+    }
+    
     func getCountryData(sport: String, compilation: @escaping ([Sporty.LeaguesData]?, Error?) -> Void) {
         if shouldReturnError{
             compilation(nil, ResponseWithError.responseError )

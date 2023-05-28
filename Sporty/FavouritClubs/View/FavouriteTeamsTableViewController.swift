@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Alamofire
 class FavouriteTeamsTableViewController: UITableViewController
 ,FavouritTeamsProtocol{
     var teamList : [FavouritTeamModel]!
@@ -96,10 +96,25 @@ class FavouriteTeamsTableViewController: UITableViewController
         present(alertController, animated: true, completion: nil)
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var nav : ClubDataViewController = self.storyboard?.instantiateViewController(withIdentifier: "ClubDataViewController") as! ClubDataViewController
-        nav.sport = self.teamList[indexPath.row].sport
-        nav.teamId = String(Int(self.teamList[indexPath.row].id ?? 0))
-        self.navigationController?.pushViewController(nav, animated: true)
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
+        if ((manager!.isReachable)) {
+            var nav : ClubDataViewController = self.storyboard?.instantiateViewController(withIdentifier: "ClubDataViewController") as! ClubDataViewController
+            nav.sport = self.teamList[indexPath.row].sport
+            nav.teamId = String(Int(self.teamList[indexPath.row].id ?? 0))
+            self.navigationController?.pushViewController(nav, animated: true)
+            
+        }else{
+            showNoNetworkAlert()
+        }
+    }
+    func showNoNetworkAlert(){
+        let alertController = UIAlertController(title: "No Internet", message: "No Internet Connection", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // Handle OK button tap action
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
     
 
