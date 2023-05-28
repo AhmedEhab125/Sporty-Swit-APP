@@ -9,8 +9,7 @@ import UIKit
 import Kingfisher
 
 class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource
-                                ,UITableViewDelegate, UITableViewDataSource
-,ShowComingEventProtocol ,LeagueScoreProtocol,TeamsProtocol{
+,UITableViewDelegate, UITableViewDataSource,ShowComingEventProtocol ,LeagueScoreProtocol,TeamsProtocol{
   
     
  
@@ -22,7 +21,7 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
     private let teamsNetworkIndicator = UIActivityIndicatorView(style: .large)
 
 
- 
+    @IBOutlet weak var teamHeader: UILabel!
     
     @IBOutlet weak var teamsCollectionView: UICollectionView!
     @IBOutlet weak var mstchresultTable: UITableView!
@@ -89,6 +88,7 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         // Do any additional setup after loading the view.
         if(sport.elementsEqual("tennis")){
             teamsCollectionView.isHidden = true
+            teamHeader.isHidden = true
             
         }
     }
@@ -115,8 +115,14 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         let cell = tableView.dequeueReusableCell(withIdentifier: "matchResulttableCell", for: indexPath) as! GameResultTableViewCell
         if count < leagueScoreList.count{
             if leagueScoreList[0].eventKey != -1{
-                cell.awayTeamName.text = leagueScoreList[count].eventAwayTeam
-                cell.homeTeamName.text = leagueScoreList[count].eventHomeTeam
+                if sport.elementsEqual("tennis"){
+                    cell.awayTeamName.text = leagueScoreList[count].eventFirstPlayer
+                    cell.homeTeamName.text = leagueScoreList[count].eventSecondPlayer
+                }else{
+                    cell.awayTeamName.text = leagueScoreList[count].eventAwayTeam
+                    cell.homeTeamName.text = leagueScoreList[count].eventHomeTeam
+                    
+                }
                 
                 cell.gameDate.text = leagueScoreList[count].eventDate
                 cell.gameScore.text =  leagueScoreList[count].eventFinalResult

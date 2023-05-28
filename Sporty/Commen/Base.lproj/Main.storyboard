@@ -357,6 +357,7 @@
                     <connections>
                         <outlet property="collectionView" destination="cVM-pG-I2F" id="od0-T5-ND8"/>
                         <outlet property="mstchresultTable" destination="hvh-5l-ghi" id="qvY-NA-nUJ"/>
+                        <outlet property="teamHeader" destination="bBK-8R-PnV" id="T4V-nm-3Kq"/>
                         <outlet property="teamsCollectionView" destination="Mra-6I-3OJ" id="oK4-Bs-qrS"/>
                     </connections>
                 </viewController>
@@ -397,7 +398,7 @@
                                     <outlet property="delegate" destination="0Uo-zF-cei" id="jzm-ac-Kyp"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4b-rU-W7A">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4b-rU-W7A">
                                 <rect key="frame" x="16" y="64" width="361" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="KTM-WB-72G"/>
@@ -510,7 +511,7 @@
     <resources>
         <image name="basketball" width="360" height="494"/>
         <image name="cricket" width="1257" height="2608"/>
-        <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="heart" catalog="system" width="32" height="32"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="noimg1" width="600" height="600"/>
         <image name="star" catalog="system" width="128" height="116"/>

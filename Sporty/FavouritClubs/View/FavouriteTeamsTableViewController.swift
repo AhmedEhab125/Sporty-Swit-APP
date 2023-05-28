@@ -95,6 +95,12 @@ class FavouriteTeamsTableViewController: UITableViewController
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var nav : ClubDataViewController = self.storyboard?.instantiateViewController(withIdentifier: "ClubDataViewController") as! ClubDataViewController
+        nav.sport = self.teamList[indexPath.row].sport
+        nav.teamId = String(Int(self.teamList[indexPath.row].id ?? 0))
+        self.navigationController?.pushViewController(nav, animated: true)
+    }
     
 
     /*

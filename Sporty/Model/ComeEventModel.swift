@@ -25,7 +25,10 @@ class ComeEventModel: Codable {
     
     // MARK: - Result
     class ComeEventData: Codable {
-        
+        var eventFirstPlayer: String?
+        var firstPlayerKey: Int?
+        var eventSecondPlayer: String?
+        var secondPlayerKey: Int?
         var eventKey            : Int?           = nil
         var eventDate           : String?        = nil
         var eventTime           : String?        = nil
@@ -89,6 +92,10 @@ class ComeEventModel: Codable {
             case fkStageKey          = "fk_stage_key"
             case stageName           = "stage_name"
             case leagueGroup         = "league_group"
+            case eventFirstPlayer = "event_first_player"
+            case firstPlayerKey = "first_player_key"
+            case eventSecondPlayer = "event_second_player"
+            case secondPlayerKey = "second_player_key"
             
         }
         

@@ -10,4 +10,5 @@ protocol NetworkProtocol{
      func getCountryData(sport: String,  compilation : @escaping ([LeaguesData]?,Error?)->Void)
      func getComingEvent(sport: String,fromDate : String ,toDate :String ,leagueid :String,  compilation : @escaping ([ComeEventData]?,Error?)->Void)
      func getTeams(sport: String,leagueid :String,  compilation : @escaping ([TeamData]?,Error?)->Void)
+    func getTeamData(sport: String,teamId :String,  compilation : @escaping ([TeamData]?,Error?)->Void)
 }
