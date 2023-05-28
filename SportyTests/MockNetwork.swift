@@ -21,6 +21,14 @@ class MockNetwork{
 }
 extension MockNetwork:NetworkProtocol{
     func getTeamData(sport: String, teamId: String, compilation: @escaping ([Sporty.TeamData]?, Error?) -> Void) {
+        if shouldReturnError{
+            compilation(nil, ResponseWithError.responseError )
+        }else{
+       
+            let data = try? JSONDecoder().decode(TeamsModel.self, from: Utilites.leagueMockItemsJSONResponse.data(using: .utf8)! )
+            compilation(data?.result, nil )
+            
+        }
         
     }
     

@@ -9,11 +9,11 @@ import XCTest
 @testable import Sporty
 final class MokeNetworkTest: XCTestCase {
     var networkManager : NetworkProtocol?
-
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
@@ -26,7 +26,7 @@ final class MokeNetworkTest: XCTestCase {
             }
             XCTAssertGreaterThan(listLeag.count, 0, "API Faild")
         })
-            
+        
     }
     func testLoadDataFromURLShouldPassAndParsingitInComingEvents(){
         networkManager = MockNetwork(shouldReturnError: false)
@@ -37,7 +37,7 @@ final class MokeNetworkTest: XCTestCase {
             }
             XCTAssertGreaterThan(listComeEvent.count, 0, "API Faild")
         })
-            
+        
     }
     func testLoadDataFromURLShouldPassAndParsingitInTeams(){
         networkManager = MockNetwork(shouldReturnError: false)
@@ -47,9 +47,9 @@ final class MokeNetworkTest: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(listTeamData.count, 0, "API Faild")
-
-        })
             
+        })
+        
     }
     func testLoadDataFromURLShouldFailLeagues(){
         networkManager = MockNetwork(shouldReturnError: true)
@@ -69,7 +69,7 @@ final class MokeNetworkTest: XCTestCase {
         networkManager = MockNetwork(shouldReturnError: true)
         networkManager?.getTeams(sport: "football", leagueid: "", compilation: { teams, error in
             XCTAssertNil(teams, "Items Not nil")
-
+            
         })
         
     }
@@ -94,13 +94,13 @@ final class MokeNetworkTest: XCTestCase {
                 return
             }
         })
-            
-         
+        
+        
         
     }
     func testDecodingComeEventsFails(){
         networkManager = MockNetwork(shouldReturnError: false)
-        Utilites.leagueMockItemsJSONResponse = """
+        Utilites.comeEventsMockItemsJSONResponse = """
                                         "menu": {
                                           "id": "file",
                                           "value": "File",
@@ -119,12 +119,12 @@ final class MokeNetworkTest: XCTestCase {
                 return
             }
         })
-            
+        
         
     }
     func testDecodingTeamsFails(){
         networkManager = MockNetwork(shouldReturnError: false)
-        Utilites.leagueMockItemsJSONResponse = """
+        Utilites.teamsMockItemsJSONResponse = """
                                         "menu": {
                                           "id": "file",
                                           "value": "File",
@@ -143,9 +143,34 @@ final class MokeNetworkTest: XCTestCase {
                 return
             }
         })
-           
+        
         
     }
-
-
+    func testDecodingTeamFails(){
+        networkManager = MockNetwork(shouldReturnError: false)
+        Utilites.teamsMockItemsJSONResponse = """
+                                        "menu": {
+                                          "id": "file",
+                                          "value": "File",
+                                          "popup": {
+                                            "menuitem": [
+                                              {"value": "New", "onclick": "CreateNewDoc()"},
+                                              {"value": "Open", "onclick": "OpenDoc()"},
+                                              {"value": "Close", "onclick": "CloseDoc()"}
+                                            ]
+                                          }
+                                        }}
+"""
+        networkManager?.getTeamData(sport: "", teamId: "", compilation: { teams, error in
+            guard let teams = teams else{
+                XCTAssertNil(teams, "Items Not nil")
+                return
+            }
+        })
+        
+        
+    }
+    
+    
+    
 }
