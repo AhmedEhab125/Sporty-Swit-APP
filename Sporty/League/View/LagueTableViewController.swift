@@ -45,6 +45,7 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
             initNetworkIndicator()
             leagueslist = []
             filterList = leagueslist
+            tableView.reloadData()
             leaguesPresenter = LeaguesPresenter(leagueProtocol: self,network: NetworkServise())
             leaguesPresenter.showLeagues(sport: sport)
         }else{
@@ -151,6 +152,12 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
                 tableView.reloadData()
             }
         }
+    }
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform(scaleX: 0.2, y: 0.8)
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseOut], animations: {
+            cell.transform = CGAffineTransform.identity
+        }, completion: nil)
     }
 
     /*
