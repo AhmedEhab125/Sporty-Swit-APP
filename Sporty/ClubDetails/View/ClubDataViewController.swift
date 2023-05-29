@@ -37,7 +37,9 @@ class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clubPresenter = ClubDataPresenter(network: NetworkServise(),showTeamData: self)
+        let appDeleate = UIApplication.shared.delegate as! AppDelegate
+
+        clubPresenter = ClubDataPresenter(network: NetworkServise.getInstance,showTeamData: self,database: ClubDataBase.getInstance(appDeleate: appDeleate))
         teamCollectionview.register(UINib(nibName: "TeamPlayersCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "teamPlayerCell")
         
         if clubData != nil{
@@ -92,8 +94,7 @@ class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollec
             
         }else{
             self.facBtnImg.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            let appDeleate = UIApplication.shared.delegate as! AppDelegate
-            clubPresenter.addTeamToDB(appDelegate: appDeleate, id: clubData?.teamKey ?? 0, name: clubData?.teamName ?? "", img: (clubImg.image?.jpegData(compressionQuality: 1.0))!, sport: sport)
+            clubPresenter.addTeamToDB( id: clubData?.teamKey ?? 0, name: clubData?.teamName ?? "", img: (clubImg.image?.jpegData(compressionQuality: 1.0))!, sport: sport)
             
         }
     }

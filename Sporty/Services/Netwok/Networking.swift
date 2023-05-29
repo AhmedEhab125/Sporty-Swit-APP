@@ -8,8 +8,10 @@ import Foundation
 import Alamofire
 
 class NetworkServise: NetworkProtocol{
-    
-    
+    private init(){
+        
+    }
+   static let getInstance = NetworkServise()
     
     func getCountryData(sport: String,  compilation : @escaping ([LeaguesData]?,Error?)->Void){
         print("entred")

@@ -32,7 +32,8 @@ class ComeEventData: Codable {
     var eventHomeFinalResult, eventAwayFinalResult: String?
     var eventHomeTeamLogo, eventAwayTeamLogo: String?
     var eventDateStart: String?
-
+    var eventFirstPlayerLogo, eventSecondPlayerLogo: String?
+    
     var eventKey            : Int?           = nil
     var eventDate           : String?        = nil
     var eventTime           : String?        = nil
@@ -105,7 +106,9 @@ class ComeEventData: Codable {
         case eventHomeTeamLogo = "event_home_team_logo"
         case eventAwayTeamLogo = "event_away_team_logo"
         case eventDateStart = "event_date_start"
-
+        case eventFirstPlayerLogo = "event_first_player_logo"
+        case eventSecondPlayerLogo = "event_second_player_logo"
+        
         
     }
     

@@ -46,7 +46,7 @@ class LagueTableViewController: UITableViewController,leaguesProtocol,UISearchBa
             leagueslist = []
             filterList = leagueslist
             tableView.reloadData()
-            leaguesPresenter = LeaguesPresenter(leagueProtocol: self,network: NetworkServise())
+            leaguesPresenter = LeaguesPresenter(leagueProtocol: self,network: NetworkServise.getInstance)
             leaguesPresenter.showLeagues(sport: sport)
         }else{
             

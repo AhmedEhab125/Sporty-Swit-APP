@@ -22,8 +22,8 @@ class FavouriteTeamsTableViewController: UITableViewController
         teamList = []
         let appDeleate = UIApplication.shared.delegate as! AppDelegate
 
-        presenter = FavouriteTeamsPresenter(favTeams: self)
-        presenter.getFavouriteTeams(appDelegat: appDeleate)
+        presenter = FavouriteTeamsPresenter(favTeams: self,database: ClubDataBase.getInstance(appDeleate: appDeleate))
+        presenter.getFavouriteTeams()
         self.tableView.register(UINib(nibName: "LagueTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -54,7 +54,7 @@ class FavouriteTeamsTableViewController: UITableViewController
     }
     override func viewWillAppear(_ animated: Bool) {
         let appDeleate = UIApplication.shared.delegate as! AppDelegate
-        presenter.getFavouriteTeams(appDelegat: appDeleate)
+        presenter.getFavouriteTeams()
     }
     
 
@@ -84,7 +84,7 @@ class FavouriteTeamsTableViewController: UITableViewController
             let appDeleate = UIApplication.shared.delegate as! AppDelegate
 
             // Handle OK button tap action
-            self.presenter.deleteFromFavourite(appDelegat: appDeleate, team: indexPath.row)
+            self.presenter.deleteFromFavourite( team: indexPath.row)
             self.teamList.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
         }

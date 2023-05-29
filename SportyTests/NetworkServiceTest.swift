@@ -9,7 +9,7 @@ import XCTest
 @testable import Sporty
 
 final class NetworkServiceTest: XCTestCase {
-    let network = NetworkServise()
+    let network = NetworkServise.getInstance
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -20,7 +20,7 @@ final class NetworkServiceTest: XCTestCase {
     }
     func testLoadDataFromLeaguesURL(){
         let myExpectation = expectation(description: "waiting for the API")
-        NetworkServise().getCountryData(sport: "football") {
+        network.getCountryData(sport: "football") {
             listLeagues,error in
             
             guard let listLeagues  = listLeagues else{
@@ -38,7 +38,7 @@ final class NetworkServiceTest: XCTestCase {
     }
     func testLoadDataFromComeEventURL(){
         let myExpectation = expectation(description: "waiting for the API")
-        NetworkServise().getComingEvent(sport: "football", fromDate: "2023-05-10", toDate: "2023-06-10", leagueid: "45") { listComeEventData,error in
+        network.getComingEvent(sport: "football", fromDate: "2023-05-10", toDate: "2023-06-10", leagueid: "45") { listComeEventData,error in
             
             guard case let data  = listComeEventData else{
                 XCTFail()
@@ -53,7 +53,7 @@ final class NetworkServiceTest: XCTestCase {
     }
     func testLoadDataFromTeamsURL(){
         let myExpectation = expectation(description: "waiting for the API")
-        NetworkServise().getTeams(sport: "football", leagueid: "45") { listTeamData,error in
+        network.getTeams(sport: "football", leagueid: "45") { listTeamData,error in
             guard let data
                     = listTeamData else{
                 XCTFail()
