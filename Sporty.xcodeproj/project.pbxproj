@@ -44,6 +44,7 @@
 		E2A783F22A2017EC006371A4 /* FavouriteTeamsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A783F12A2017EC006371A4 /* FavouriteTeamsPresenter.swift */; };
 		E2A783F52A20186C006371A4 /* FavouriteTeamsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A783F42A20186C006371A4 /* FavouriteTeamsProtocol.swift */; };
 		E2A783F82A202655006371A4 /* FavouritTeamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A783F72A202655006371A4 /* FavouritTeamModel.swift */; };
+		E2A89D812A25552B005EBEEC /* DataBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A89D802A25552B005EBEEC /* DataBaseProtocol.swift */; };
 		E2B866B82A1C225A00E85C0A /* LeaguesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B866B72A1C225A00E85C0A /* LeaguesPresenter.swift */; };
 		E2BB032A2A1C0BE100EB52EB /* Countrymodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB03292A1C0BE100EB52EB /* Countrymodel.swift */; };
 		E2BB032D2A1C0E5100EB52EB /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB032C2A1C0E5100EB52EB /* Networking.swift */; };
@@ -110,6 +111,7 @@
 		E2A783F12A2017EC006371A4 /* FavouriteTeamsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTeamsPresenter.swift; sourceTree = "<group>"; };
 		E2A783F42A20186C006371A4 /* FavouriteTeamsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTeamsProtocol.swift; sourceTree = "<group>"; };
 		E2A783F72A202655006371A4 /* FavouritTeamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritTeamModel.swift; sourceTree = "<group>"; };
+		E2A89D802A25552B005EBEEC /* DataBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseProtocol.swift; sourceTree = "<group>"; };
 		E2B866B72A1C225A00E85C0A /* LeaguesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesPresenter.swift; sourceTree = "<group>"; };
 		E2BB03282A1C094300EB52EB /* football.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = football.png; sourceTree = "<group>"; };
 		E2BB03292A1C0BE100EB52EB /* Countrymodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countrymodel.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		E2A6C01F2A1945810021F962 /* Sporty */ = {
 			isa = PBXGroup;
 			children = (
+				E2A89D7D2A255423005EBEEC /* SplashScreen */,
 				E2A783EC2A2016DD006371A4 /* FavouritClubs */,
 				E2C6AEF62A1EA5D800EF1269 /* ClubDetails */,
 				E229440B2A1CB353005EBF4B /* LeagueDetails */,
@@ -273,7 +276,6 @@
 				E2BB03212A1C07D900EB52EB /* Home */,
 				E2A6C0312A1945830021F962 /* Info.plist */,
 				E2A6C0292A1945810021F962 /* Sporty.xcdatamodeld */,
-				E2C051EC2A2409A50036BF9B /* SplashScreeViewController.swift */,
 			);
 			path = Sporty;
 			sourceTree = "<group>";
@@ -327,6 +329,32 @@
 				E2A783F72A202655006371A4 /* FavouritTeamModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E2A89D7D2A255423005EBEEC /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				E2C051EC2A2409A50036BF9B /* SplashScreeViewController.swift */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		E2A89D7E2A255506005EBEEC /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				E2A783E72A20122F006371A4 /* ClubDataBase.swift */,
+				E2A89D802A25552B005EBEEC /* DataBaseProtocol.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		E2A89D7F2A255512005EBEEC /* Netwok */ = {
+			isa = PBXGroup;
+			children = (
+				E2BB032C2A1C0E5100EB52EB /* Networking.swift */,
+				E27102EA2A22BC0D00C6DBB7 /* NetworkProtocol.swift */,
+			);
+			path = Netwok;
 			sourceTree = "<group>";
 		};
 		E2BB03212A1C07D900EB52EB /* Home */ = {
@@ -403,9 +431,8 @@
 		E2BB032B2A1C0E3E00EB52EB /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E2BB032C2A1C0E5100EB52EB /* Networking.swift */,
-				E2A783E72A20122F006371A4 /* ClubDataBase.swift */,
-				E27102EA2A22BC0D00C6DBB7 /* NetworkProtocol.swift */,
+				E2A89D7F2A255512005EBEEC /* Netwok */,
+				E2A89D7E2A255506005EBEEC /* DataBase */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -607,6 +634,7 @@
 				E2A6C0392A1950E00021F962 /* SportTypeCollectionViewCell.swift in Sources */,
 				E2C051ED2A2409A50036BF9B /* SplashScreeViewController.swift in Sources */,
 				E22944282A1D6AE8005EBF4B /* LeagueDetailsPresenter.swift in Sources */,
+				E2A89D812A25552B005EBEEC /* DataBaseProtocol.swift in Sources */,
 				E27102EB2A22BC0D00C6DBB7 /* NetworkProtocol.swift in Sources */,
 				E2BB032D2A1C0E5100EB52EB /* Networking.swift in Sources */,
 				E2A783F22A2017EC006371A4 /* FavouriteTeamsPresenter.swift in Sources */,
@@ -830,6 +858,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -861,6 +890,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

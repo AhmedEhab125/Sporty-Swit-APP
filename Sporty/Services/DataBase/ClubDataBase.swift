@@ -7,10 +7,23 @@
 
 import Foundation
 import CoreData
-class ClubDataBase{
-    static func addTeam(appDeleate : AppDelegate,name : String , id :Int, img :Data,sport :String){
+
+class ClubDataBase :DataBaseProtocol{
+    private var appDeleate : AppDelegate
+    private static var clubDatabaseInstance : ClubDataBase? = nil
+    private init(appDeleate: AppDelegate) {
+        self.appDeleate = appDeleate
+    }
+    static func getInstance(appDeleate : AppDelegate)->ClubDataBase{
+        if clubDatabaseInstance == nil{
+            clubDatabaseInstance = ClubDataBase(appDeleate: appDeleate)
+        }
+        return self.clubDatabaseInstance!
         
-        getTeams(appDeleate: appDeleate) { favTeams in
+    }
+     func addTeam(name : String , id :Int, img :Data,sport :String){
+        
+        getTeams() { favTeams in
             var flag = true
             favTeams.forEach { item in
                 if(item.id == id){
@@ -18,7 +31,7 @@ class ClubDataBase{
                 }
             }
             if flag==true{
-                let context : NSManagedObjectContext = appDeleate.persistentContainer.viewContext
+                let context : NSManagedObjectContext = self.appDeleate.persistentContainer.viewContext
                 let entity = NSEntityDescription.entity(forEntityName: "ClubData", in: context)
                 let club = NSManagedObject(entity: entity!, insertInto: context)
                 club.setValue(id, forKey: "id")
@@ -31,7 +44,7 @@ class ClubDataBase{
         
 
     }
-    static func getTeams(appDeleate : AppDelegate,compilation : @escaping ([FavouritTeamModel])->Void){
+     func getTeams(compilation : @escaping ([FavouritTeamModel])->Void){
         var teamList :[FavouritTeamModel] = []
         var context : NSManagedObjectContext = appDeleate.persistentContainer.viewContext
         let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "ClubData")
@@ -50,7 +63,7 @@ class ClubDataBase{
         })
         compilation(teamList)
     }
-    static func deleteTeam(appDeleate : AppDelegate,index :Int){
+     func deleteTeam(index :Int){
         var context : NSManagedObjectContext = appDeleate.persistentContainer.viewContext
         let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "ClubData")
         guard let  data  = try? context.fetch(fetchReq)else{

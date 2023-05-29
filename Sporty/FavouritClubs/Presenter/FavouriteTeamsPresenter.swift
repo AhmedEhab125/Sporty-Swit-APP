@@ -8,17 +8,19 @@
 import Foundation
 class FavouriteTeamsPresenter{
     var favTeams :FavouritTeamsProtocol
-    init(favTeams: FavouritTeamsProtocol) {
+    var database :DataBaseProtocol
+    init(favTeams: FavouritTeamsProtocol, database: DataBaseProtocol) {
         self.favTeams = favTeams
+        self.database = database
     }
-    func getFavouriteTeams(appDelegat:AppDelegate){
-        ClubDataBase.getTeams(appDeleate: appDelegat) { [weak self]
+    func getFavouriteTeams(){
+        database.getTeams() { [weak self]
             teamList in
             self?.favTeams.showTeams(list: teamList)
         }
     }
-    func deleteFromFavourite(appDelegat:AppDelegate,team: Int){
-        ClubDataBase.deleteTeam(appDeleate: appDelegat, index: team)
+    func deleteFromFavourite(team: Int){
+        database.deleteTeam( index: team)
     }
 }
 

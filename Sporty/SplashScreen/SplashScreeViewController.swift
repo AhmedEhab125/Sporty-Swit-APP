@@ -23,8 +23,6 @@ class SplashScreeViewController: UIViewController {
         
         animationView.play()
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            // Transition to main screen
-            // For example, you can present a new view controller:
             let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
             mainVC.modalPresentationStyle = .fullScreen
             self.present(mainVC, animated: true, completion: nil)

@@ -74,7 +74,7 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
         teamlist = []
         leagueScoreList = []
        eventList = []
-        presenter = LeagueDetailsPresenter(comingEvent: self,leagueScore: self,teams: self,network: NetworkServise())
+        presenter = LeagueDetailsPresenter(comingEvent: self,leagueScore: self,teams: self,network: NetworkServise.getInstance)
         presenter.getEvents(sport: sport,leagueId: leagueId)
         presenter.getScores(sport: sport, leagueId: leagueId)
         presenter.getTeams(sport: sport, leagueId: leagueId)
@@ -120,8 +120,8 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
                     cell.homeTeamName.text = leagueScoreList[count].eventSecondPlayer
                     cell.gameDate.text = leagueScoreList[count].eventDate
                     cell.gameScore.text =  leagueScoreList[count].eventFinalResult
-                    self.setImg(img: cell.awayTeamImg, url: leagueScoreList[count].awayTeamLogo ?? "")
-                    self.setImg(img: cell.homeTeamImg, url: leagueScoreList[count].homeTeamLogo ?? "")
+                    self.setImg(img: cell.awayTeamImg, url: leagueScoreList[count].eventSecondPlayerLogo ?? "")
+                    self.setImg(img: cell.homeTeamImg, url: leagueScoreList[count].eventFirstPlayerLogo ?? "")
                 }else if(sport.elementsEqual("cricket")){
                     cell.awayTeamName.text = leagueScoreList[count].eventAwayTeam
                     cell.homeTeamName.text = leagueScoreList[count].eventHomeTeam
