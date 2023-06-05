@@ -8,4 +8,6 @@
 import Foundation
 protocol TeamDataProtocol{
     func getTeamData(teamData : TeamData?)
+    func isTeamFavourite(favTeams :Bool)
 }
+

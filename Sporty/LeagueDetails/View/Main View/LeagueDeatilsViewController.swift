@@ -185,9 +185,9 @@ class LeagueDeatilsViewController: UIViewController,UICollectionViewDelegate,UIC
                 cell.eventDate.text =  eventList[eventList.count-1-indexPath.row].eventDate
                 cell.eventTime.text = eventList[eventList.count-1-indexPath.row].eventTime
                 
-                setImg(img: cell.AwayTeamImg, url: eventList[eventList.count-1-indexPath.row].awayTeamLogo ?? "")
-                
-                setImg(img: cell.homeTeamImg, url: eventList[eventList.count-1-indexPath.row].homeTeamLogo ?? "")
+                setImg(img: cell.AwayTeamImg, url: (eventList[eventList.count-1-indexPath.row].awayTeamLogo ?? eventList[eventList.count-1-indexPath.row].eventAwayTeamLogo) ?? "")
+            
+                setImg(img: cell.homeTeamImg, url: eventList[eventList.count-1-indexPath.row].homeTeamLogo ?? eventList[eventList.count-1-indexPath.row].eventHomeTeamLogo ?? "")
                 
             }else{
                 cell.AwayTeamImg.isHidden = true

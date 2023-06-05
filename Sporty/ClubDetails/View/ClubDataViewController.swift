@@ -8,6 +8,8 @@
 import UIKit
 import Kingfisher
 class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,TeamDataProtocol {
+   
+    
     
     
     var clubData : TeamData?
@@ -21,6 +23,14 @@ class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollec
     @IBOutlet weak var teamName: UILabel!
     @IBOutlet weak var clubImg: UIImageView!
     @IBOutlet weak var teamCollectionview: UICollectionView!
+    func isTeamFavourite(favTeams: Bool) {
+        if favTeams {
+            clubState = "In Favourite"
+            self.facBtnImg.isUserInteractionEnabled = false
+            self.facBtnImg.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+    }
+    
     func getTeamData(teamData: TeamData?) {
         if teamData != nil{
             clubState = "In Favourite"
@@ -41,7 +51,7 @@ class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollec
 
         clubPresenter = ClubDataPresenter(network: NetworkServise.getInstance,showTeamData: self,database: ClubDataBase.getInstance(appDeleate: appDeleate))
         teamCollectionview.register(UINib(nibName: "TeamPlayersCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "teamPlayerCell")
-        
+        clubPresenter.isTeamFavouriteTeam(id: (Int(teamId ?? "") ?? clubData?.teamKey)! )
         if clubData != nil{
             setImg(img: clubImg, url: clubData?.teamLogo ?? "")
             teamName.text = clubData?.teamName
@@ -93,6 +103,7 @@ class ClubDataViewController: UIViewController,UICollectionViewDelegate,UICollec
         if (clubState.elementsEqual("In Favourite")){
             
         }else{
+            self.facBtnImg.isUserInteractionEnabled = false
             self.facBtnImg.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             clubPresenter.addTeamToDB( id: clubData?.teamKey ?? 0, name: clubData?.teamName ?? "", img: (clubImg.image?.jpegData(compressionQuality: 1.0))!, sport: sport)
             
