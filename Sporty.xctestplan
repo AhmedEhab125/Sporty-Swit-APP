@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "E6050B6B-86B9-459E-B187-21A76C08A878",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Sporty.xcodeproj",
+      "identifier" : "E2A6C01C2A1945810021F962",
+      "name" : "Sporty"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Sporty.xcodeproj",
+        "identifier" : "E27102DC2A22AF5300C6DBB7",
+        "name" : "SportyTests"
+      }
+    }
+  ],
+  "version" : 1
+}

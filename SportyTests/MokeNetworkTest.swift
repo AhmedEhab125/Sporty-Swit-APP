@@ -8,7 +8,6 @@
 import XCTest
 @testable import Sporty
 final class MokeNetworkTest: XCTestCase {
-    var networkManager : NetworkProtocol?
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -18,8 +17,8 @@ final class MokeNetworkTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     func testLoadDataFromURLShouldPassAndParsingitInLeagues(){
-        networkManager = MockNetwork(shouldReturnError: false)
-        networkManager?.getCountryData(sport: "football", compilation: { listLeag, error in
+        var networkManager = MockNetwork(shouldReturnError: false)
+        networkManager.getCountryData(sport: "football", compilation: { listLeag, error in
             guard let listLeag  = listLeag else{
                 XCTFail()
                 return
@@ -29,8 +28,8 @@ final class MokeNetworkTest: XCTestCase {
         
     }
     func testLoadDataFromURLShouldPassAndParsingitInComingEvents(){
-        networkManager = MockNetwork(shouldReturnError: false)
-        networkManager?.getComingEvent(sport: "football", fromDate: "", toDate: "", leagueid: "", compilation: { listComeEvent, error in
+        var networkManager = MockNetwork(shouldReturnError: false)
+        networkManager.getComingEvent(sport: "football", fromDate: "", toDate: "", leagueid: "", compilation: { listComeEvent, error in
             guard let listComeEvent  = listComeEvent else{
                 XCTFail()
                 return
@@ -40,8 +39,8 @@ final class MokeNetworkTest: XCTestCase {
         
     }
     func testLoadDataFromURLShouldPassAndParsingitInTeams(){
-        networkManager = MockNetwork(shouldReturnError: false)
-        networkManager?.getTeams(sport: "", leagueid: "", compilation: { listTeamData, error in
+        var networkManager = MockNetwork(shouldReturnError: false)
+        networkManager.getTeams(sport: "", leagueid: "", compilation: { listTeamData, error in
             guard let listTeamData = listTeamData else{
                 XCTFail()
                 return
@@ -52,29 +51,29 @@ final class MokeNetworkTest: XCTestCase {
         
     }
     func testLoadDataFromURLShouldFailLeagues(){
-        networkManager = MockNetwork(shouldReturnError: true)
-        networkManager?.getCountryData(sport: "football", compilation: { leags, erro in
+      var  networkManager = MockNetwork(shouldReturnError: true)
+        networkManager.getCountryData(sport: "football", compilation: { leags, erro in
             XCTAssertNil(leags, "Items Not nil")
         })
         
     }
     func testLoadDataFromURLShouldFailEvents(){
-        networkManager = MockNetwork(shouldReturnError: true)
-        networkManager?.getComingEvent(sport: "football", fromDate: "", toDate: "", leagueid: "", compilation: { comeEvent, error in
+       var networkManager = MockNetwork(shouldReturnError: true)
+        networkManager.getComingEvent(sport: "football", fromDate: "", toDate: "", leagueid: "", compilation: { comeEvent, error in
             XCTAssertNil(comeEvent, "Items Not nil")
         })
         
     }
     func testLoadDataFromURLShouldFailTeams(){
-        networkManager = MockNetwork(shouldReturnError: true)
-        networkManager?.getTeams(sport: "football", leagueid: "", compilation: { teams, error in
+      var  networkManager = MockNetwork(shouldReturnError: true)
+        networkManager.getTeams(sport: "football", leagueid: "", compilation: { teams, error in
             XCTAssertNil(teams, "Items Not nil")
             
         })
         
     }
     func testDecodingLeaguesFails(){
-        networkManager = MockNetwork(shouldReturnError: false)
+      var  networkManager = MockNetwork(shouldReturnError: false)
         Utilites.leagueMockItemsJSONResponse = """
                                         "menu": {
                                           "id": "file",
@@ -88,7 +87,7 @@ final class MokeNetworkTest: XCTestCase {
                                           }
                                         }}
 """
-        networkManager?.getCountryData(sport: "football", compilation: { leagues, error in
+        networkManager.getCountryData(sport: "football", compilation: { leagues, error in
             guard let leagues = leagues else{
                 XCTAssertNil(leagues, "Items Not nil")
                 return
@@ -99,7 +98,7 @@ final class MokeNetworkTest: XCTestCase {
         
     }
     func testDecodingComeEventsFails(){
-        networkManager = MockNetwork(shouldReturnError: false)
+       var networkManager = MockNetwork(shouldReturnError: false)
         Utilites.comeEventsMockItemsJSONResponse = """
                                         "menu": {
                                           "id": "file",
@@ -113,7 +112,7 @@ final class MokeNetworkTest: XCTestCase {
                                           }
                                         }}
 """
-        networkManager?.getComingEvent(sport: "", fromDate: "", toDate: "", leagueid: "", compilation: { comeEvents, error in
+        networkManager.getComingEvent(sport: "", fromDate: "", toDate: "", leagueid: "", compilation: { comeEvents, error in
             guard let comeEvents = comeEvents else{
                 XCTAssertNil(comeEvents, "Items Not nil")
                 return
@@ -123,7 +122,7 @@ final class MokeNetworkTest: XCTestCase {
         
     }
     func testDecodingTeamsFails(){
-        networkManager = MockNetwork(shouldReturnError: false)
+     var   networkManager = MockNetwork(shouldReturnError: false)
         Utilites.teamsMockItemsJSONResponse = """
                                         "menu": {
                                           "id": "file",
@@ -137,7 +136,7 @@ final class MokeNetworkTest: XCTestCase {
                                           }
                                         }}
 """
-        networkManager?.getTeams(sport: "", leagueid: "", compilation: { teams, error in
+        networkManager.getTeams(sport: "", leagueid: "", compilation: { teams, error in
             guard let teams = teams else{
                 XCTAssertNil(teams, "Items Not nil")
                 return
@@ -147,7 +146,7 @@ final class MokeNetworkTest: XCTestCase {
         
     }
     func testDecodingTeamFails(){
-        networkManager = MockNetwork(shouldReturnError: false)
+    var    networkManager = MockNetwork(shouldReturnError: false)
         Utilites.teamsMockItemsJSONResponse = """
                                         "menu": {
                                           "id": "file",
@@ -161,7 +160,7 @@ final class MokeNetworkTest: XCTestCase {
                                           }
                                         }}
 """
-        networkManager?.getTeamData(sport: "", teamId: "", compilation: { teams, error in
+        networkManager.getTeamData(sport: "", teamId: "", compilation: { teams, error in
             guard let teams = teams else{
                 XCTAssertNil(teams, "Items Not nil")
                 return
