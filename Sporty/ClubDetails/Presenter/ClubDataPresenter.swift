@@ -24,4 +24,17 @@ class ClubDataPresenter{
             self?.showTeamData.getTeamData(teamData: teamDataList?[0])
         }
     }
+    func isTeamFavouriteTeam(id : Int){
+        database.getTeams { teams in
+            var retval = false
+            if !teams.isEmpty{
+                teams.forEach { team in
+                    if team.id == id{
+                      retval = true
+                    }
+                }
+            }
+            self.showTeamData.isTeamFavourite(favTeams: retval)
+        }
+    }
 }
